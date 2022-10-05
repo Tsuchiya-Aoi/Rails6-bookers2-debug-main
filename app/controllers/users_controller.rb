@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
   before_action :ensure_correct_user, only: [:edit, :update]
 
   def show
@@ -13,11 +14,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    # @user = User.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
+    # @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to user_path(@user), notice: "You have updated user successfully."
     else
@@ -25,15 +26,16 @@ class UsersController < ApplicationController
     end
   end
 
-  def followings
-    user = User.find(params[:id])
-    @users = user.followings
-  end
+  # 下記のコード削除 relationshipsコントローラに定義している為
+  # def followings
+    # user = User.find(params[:id])
+    # @users = user.followings
+  # end
 
-  def followers
-    user = User.find(params[:id])
-    @users = user.followers
-  end
+  # def followers
+    # user = User.find(params[:id])
+    # @users = user.followers
+  # end
 
   private
 
@@ -41,6 +43,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :introduction, :profile_image)
   end
 
+  # コードの削除 下記で@userを定義してるので、edit,updateアクション内の@userを消してもok
   def ensure_correct_user
     @user = User.find(params[:id])
     unless @user == current_user

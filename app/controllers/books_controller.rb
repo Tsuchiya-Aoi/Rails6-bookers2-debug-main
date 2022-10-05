@@ -1,9 +1,10 @@
 class BooksController < ApplicationController
-  before_action :authenticate_user, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
 
   def show
     @book = Book.find(params[:id])
-    # 修正 renderに直接@book.user記述
+    # 下記のコード削除 renderに直接@book.user記述
     # @user = @book.user
     @comment = BookComment.new
   end
@@ -26,9 +27,10 @@ class BooksController < ApplicationController
 
   def edit
     # @book = Book.find(params[:id])
-    unless @book.user == current_user
-     redirect_to books_path
-    end
+    # 下記のコード削除 不要の為
+    # unless @book.user == current_user
+      # redirect_to books_path
+    # end
   end
 
   def update
@@ -52,7 +54,7 @@ class BooksController < ApplicationController
     params.require(:book).permit(:title, :body)
   end
 
-  # 修正 下記で@bookを定義してるので、edit,update,destroyアクション内の@bookを消してもok
+  # コードの削除 下記で@bookを定義してるので、edit,update,destroyアクション内の@bookを消してもok
   def ensure_correct_user
     @book = Book.find(params[:id])
     unless @book.user == current_user

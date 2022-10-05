@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  # 修正 userとbookのコントローラにbefore_action :authenticate_user!を記述する
+  # 下記のコード削除 usersとbooksコントローラにbefore_action :authenticate_user!を記述する
   # before_action :authenticate_user!, except: [:top, :about]
   before_action :configure_permitted_parameters, if: :devise_controller?
 
@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     user_path(resource)
-    #修正 (resource)はログインフォームに入力されたユーザー、(current_user)はログインしているユーザー
+    #コードの修正 (resource)はログインフォームに入力されたユーザー、(current_user)はログインしているユーザー
     # user_path(current_user)
   end
 
