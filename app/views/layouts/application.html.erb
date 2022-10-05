@@ -8,12 +8,12 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <body>
+  <div class="body">
     <%= render 'layouts/header' %>
-    <main>
+    <div class="container">
       <p id="notice"><%= notice %></p>
       <%= yield %>
-    </main>
+    </div>
     <%= render 'layouts/footer' %>
-  </body>
+  </div>
 </html>
