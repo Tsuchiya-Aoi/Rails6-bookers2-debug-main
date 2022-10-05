@@ -5,7 +5,7 @@ class RelationshipsController < ApplicationController
   def create
     user = User.find(params[:user_id])
     current_user.follow(user)
-    # コードの修正
+    # コードの修正 上記のコード解答
     # current_user.follow(params[:user_id])
     redirect_to request.referer
   end
@@ -13,7 +13,7 @@ class RelationshipsController < ApplicationController
   def destroy
     user = User.find(params[:user_id])
     current_user.unfollow(user)
-    # コードの修正
+    # コードの修正 上記のコード解答
     # current_user.unfollow(params[:user_id])
     redirect_to request.referer
   end

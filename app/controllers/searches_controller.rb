@@ -2,6 +2,7 @@ class SearchesController < ApplicationController
   before_action :authenticate_user!
 
   def search
+    # コードの修正 20行目まで
     @model = params[:model]
     @content = params[:content]
     @method = params[:method]
@@ -10,7 +11,6 @@ class SearchesController < ApplicationController
     else
       @records = Book.search_for(@content, @method)
     end
-    # コードの修正
     # @range = params[:range]
     # @word = params[:word]
     # if @range == "User"
