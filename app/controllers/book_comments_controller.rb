@@ -1,17 +1,22 @@
 class BookCommentsController < ApplicationController
+
   def create
+    @book = Book.find(params[:book_id])
+    @book_comment = BookComment.new
     book = Book.find(params[:book_id])
     comment = current_user.book_comments.new(book_comment_params)
     comment.book_id = book.id
     comment.save
-    redirect_to request.referer
   end
 
   def destroy
-    BookComment.find_by(id: params[:id], book_id: params[:book_id]).destroy
+    @book = Book.find(params[:book_id])
+    @book_comment=BookComment.find_by(id: params[:id], book_id: params[:book_id]).destroy
+
+    # 応用課題6にて削除 不要の為
+    # BookComment.find_by(id: params[:id], book_id: params[:book_id]).destroy
     # コードの修正 上記のコード解答
     # BookComment.find(params[:id]).destroy
-    redirect_to request.referer
   end
 
   def book_comment_params
